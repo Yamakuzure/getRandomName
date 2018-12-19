@@ -29,7 +29,7 @@ int32_t processArguments(ENVIRONMENT * env, int argc, char * argv[])
   // The rest of the arguments are set up normally
   PAH.addArg("-c",    "--count",    pwx::ATT_SET,  &env->count,
              "Generate <count> names",                                     "count");
-  PAH.addArg(nullptr, "--chars",    pwx::ATT_SET,  &env->maxChars,
+  PAH.addArg("-C", "--chars",    pwx::ATT_SET,  &env->maxChars,
              "Set maximum characters to generate.",                        "value");
   PAH.addArg("-h",    "--help",     pwx::ATT_TRUE, &doShowHelp,
              "Show this help and exit",                                    nullptr);
@@ -37,11 +37,11 @@ int32_t processArguments(ENVIRONMENT * env, int argc, char * argv[])
              "Increase coordinates by 1 instead of random modifiers. (*)", nullptr);
   PAH.addArg("-o",    "--out",      pwx::ATT_SET,  &env->filename,
              "Write generated name(s) into <file>.",                       "filename");
-  PAH.addArg(nullptr, "--parts",    pwx::ATT_SET,  &env->maxParts,
+  PAH.addArg("-P", "--parts",    pwx::ATT_SET,  &env->maxParts,
              "Set maximum parts to generate.",                             "value");
   PAH.addArg("-s",    "--seed",     pwx::ATT_SET,  &env->seed,
              "Set the seed to <value>.",                                   "value");
-  PAH.addArg(nullptr, "--sylls",    pwx::ATT_SET,  &env->maxSyllables,
+  PAH.addArg("-S", "--sylls",    pwx::ATT_SET,  &env->maxSyllables,
              "Set maximum syllables to generate.",                         "value");
   PAH.addArg("-v",    "--version",  pwx::ATT_TRUE, &doShowVers,
              "Show program version and exit",                              nullptr);
@@ -89,20 +89,20 @@ void showHelp(ENVIRONMENT * env)
   cout << "  Usage:" << endl;
   cout << "getrn [options]" << endl << endl;
   cout << "The default behavior, when no options are given, is to write" << endl;
-  cout << "one random names with 1-3 parts, 2-5 syllables and  6-15" << endl;
+  cout << "one random name with 1-3 parts, 2-5 syllables and  6-15" << endl;
   cout << "characters to stdout." << endl << endl;
   cout << "  Options:" << endl;
   cout << "  -x,y,z,w      <value>    set value for the x,y,z or w coordinate. If" << endl;
   cout << "                           no offset is set, the program uses random ones" << endl;
   cout << PAH.getHelpStr("-c", 60, 2) << endl;
-  cout << PAH.getHelpStr("--chars", 60, 2) << endl;
+  cout << PAH.getHelpStr("-C", 60, 2) << endl;
   cout << PAH.getHelpStr("-h", 60, 2) << endl;
   cout << "    --mod<xyzw> <value>    set modifier for x, y, z or w coordinate" << endl;
   cout << "                           instead of using random ones (*)" << endl;
   cout << PAH.getHelpStr("-n", 60, 2) << endl;
   cout << PAH.getHelpStr("-o", 60, 2) << endl;
-  cout << PAH.getHelpStr("--parts", 60, 2) << endl;
-  cout << PAH.getHelpStr("--sylls", 60, 2) << endl;
+  cout << PAH.getHelpStr("-P", 60, 2) << endl;
+  cout << PAH.getHelpStr("-S", 60, 2) << endl;
   cout << PAH.getHelpStr("-s", 60, 2) << endl;
   cout << PAH.getHelpStr("-v", 60, 2) << endl;
   cout << endl << "(*) : Note on mod* and norandom:" << endl;
