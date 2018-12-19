@@ -1,6 +1,9 @@
 getRandomName Revision History
 ------------------------------
 
+0.9.0 - 2018-12-19
+Updated to use the latest pwxLib and build fine with gcc-8.2.0.
+
 0.8.6 - 2012-04-??
 Version bump to new pwxLib release version
 
