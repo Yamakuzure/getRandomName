@@ -48,7 +48,7 @@
 **/
 
 #include <fstream>
-#include <pwxLib/CRandom.h>
+#include <pwx_worker_RNG.h>
 using pwx::RNG;
 
 #include "main.h"
@@ -110,7 +110,7 @@ int main(int argc, char * argv[])
 
                   memset(disp, '\b', strlen(disp));
                   cout << disp;
-                  pwx_snprintf(disp, 31, "%d", i + 1);
+                  snprintf(disp, 31, "%d", i + 1);
                   cout << disp;
                   cout.flush();
                 }

@@ -1,4 +1,9 @@
+#include <cstring>
+#include <pwx_macros.h>
+
 #include "environment.h"
+
+ENVIRONMENT* global_env = nullptr;
 
 /** @brief default ctor
 **/
@@ -48,56 +53,39 @@ void ENVIRONMENT::setOffsets(double dX, double dY, double dZ, double dW, bool us
     }
 }
 
-/** these are callback functions for pwxArgs **/
-void cbSetX    (const char *value, void *env)
-  {
-    ENVIRONMENT *xEnv = static_cast<ENVIRONMENT *>(env);
-    xEnv->offsetX     = atof(value);
-    xEnv->useSeedOff  = false;
-  }
-void cbSetY    (const char *value, void *env)
-  {
-    ENVIRONMENT *xEnv = static_cast<ENVIRONMENT *>(env);
-    xEnv->offsetY     = atof(value);
-    xEnv->useSeedOff  = false;
-  }
-void cbSetZ    (const char *value, void *env)
-  {
-    ENVIRONMENT *xEnv = static_cast<ENVIRONMENT *>(env);
-    xEnv->offsetZ     = atof(value);
-    xEnv->useSeedOff  = false;
-  }
-void cbSetW    (const char *value, void *env)
-  {
-    ENVIRONMENT *xEnv = static_cast<ENVIRONMENT *>(env);
-    xEnv->offsetW     = atof(value);
-    xEnv->useSeedOff  = false;
-  }
-void cbSetModX (const char *value, void *env)
-  {
-    ENVIRONMENT *xEnv = static_cast<ENVIRONMENT *>(env);
-    xEnv->modX        = atof(value);
-    xEnv->useModVals  = true;
-    xEnv->useRandom   = false;
-  }
-void cbSetModY (const char *value, void *env)
-  {
-    ENVIRONMENT *xEnv = static_cast<ENVIRONMENT *>(env);
-    xEnv->modX        = atof(value);
-    xEnv->useModVals  = true;
-    xEnv->useRandom   = false;
-  }
-void cbSetModZ (const char *value, void *env)
-  {
-    ENVIRONMENT *xEnv = static_cast<ENVIRONMENT *>(env);
-    xEnv->modX        = atof(value);
-    xEnv->useModVals  = true;
-    xEnv->useRandom   = false;
-  }
-void cbSetModW (const char *value, void *env)
-  {
-    ENVIRONMENT *xEnv = static_cast<ENVIRONMENT *>(env);
-    xEnv->modX        = atof(value);
-    xEnv->useModVals  = true;
-    xEnv->useRandom   = false;
-  }
+/** this is a callback functions for pwx::PAH **/
+void envCallback(char const* arg, char const* value) {
+        if (STREQ(arg, "x")) {
+                global_env->offsetX     = atof(value);
+                global_env->useSeedOff  = false;
+        } else if (STREQ(arg, "y")) {
+                global_env->offsetY     = atof(value);
+                global_env->useSeedOff  = false;
+        } else if (STREQ(arg, "z")) {
+                global_env->offsetZ     = atof(value);
+                global_env->useSeedOff  = false;
+        } else if (STREQ(arg, "w")) {
+                global_env->offsetW     = atof(value);
+                global_env->useSeedOff  = false;
+        } else if (STREQ(arg, "modx")) {
+                global_env->modX        = atof(value);
+                global_env->useModVals  = true;
+                global_env->useRandom   = false;
+        } else if (STREQ(arg, "mody")) {
+                global_env->modY        = atof(value);
+                global_env->useModVals  = true;
+                global_env->useRandom   = false;
+        } else if (STREQ(arg, "modz")) {
+                global_env->modZ        = atof(value);
+                global_env->useModVals  = true;
+                global_env->useRandom   = false;
+        } else if (STREQ(arg, "modw")) {
+                global_env->modW        = atof(value);
+                global_env->useModVals  = true;
+                global_env->useRandom   = false;
+        }
+}
+
+void setGlobalEnv(ENVIRONMENT* env) {
+        global_env = env;
+}
