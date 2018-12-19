@@ -1,9 +1,14 @@
 # ------------------------------------
+# Version
+# ------------------------------------
+VERSION := 0.9.0
+
+# ------------------------------------
 # Tools and Flags
 # ------------------------------------
 CXX      ?= $(shell which g++)
 CXXFLAGS += -std=c++17 -Wall -Wextra -Wpedantic -fexceptions -O2
-CPPFLAGS += $(shell pkg-config --cflags pwxlib)
+CPPFLAGS += $(shell pkg-config --cflags pwxlib) -DVERSION=\"${VERSION}\"
 INSTALL  := $(shell which install)
 LDFLAGS  += $(shell pkg-config --libs pwxlib)
 RM       := $(shell which rm) -f
