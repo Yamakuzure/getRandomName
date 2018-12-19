@@ -25,20 +25,24 @@ PREFIX     ?= /usr
 DESTDIR    ?=
 BINPREFIX  ?= $(PREFIX)
 BINDIR     ?= ${BINPREFIX}/bin
-
+DOCPREFIX  ?= $(PREFIX)
+DOCDIR     ?= $(DOCPREFIX)/share/doc/getRandomName-$(VERSION)
 
 # ------------------------------------
-# Source files and objects
+# Source files, objects, deps, doc
 # ------------------------------------
-SOURCES := $(sort $(wildcard src/*.cpp))
-MODULES := $(addprefix obj/,$(notdir $(SOURCES:.cpp=.o)))
-DEPENDS := $(addprefix dep/,$(notdir $(SOURCES:.cpp=.d)))
+SOURCES  := $(sort $(wildcard src/*.cpp))
+MODULES  := $(addprefix obj/,$(notdir $(SOURCES:.cpp=.o)))
+DEPENDS  := $(addprefix dep/,$(notdir $(SOURCES:.cpp=.d)))
+DOCFILES := \
+AUTHORS ChangeLog code_of_conduct.md CONTRIBUTING.md \
+INSTALL.md LICENSE NEWS.md README.md TODO.md
 
 
 # ------------------------------------
 # Rules
 # ------------------------------------
-.Phony: clean
+.Phony: all clean install
 .SUFFIXES: .cpp
 
 # ------------------------------------
@@ -56,14 +60,26 @@ dep/%.d: src/%.cpp
 obj/%.o: src/%.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ -c $<
 
+# ------------------------------------
+# Default target
+# ------------------------------------
 all: $(TARGET)
 
+# ------------------------------------
+# Regular targets
+# ------------------------------------
 clean:
 	@echo "Cleaning getRandomName"
 	@rm -rf $(TARGET) $(MODULES)
 
 $(TARGET): $(MODULES)
 	$(CXX) -o $(TARGET) $(MODULES) $(CPPFLAGS) $(LDFLAGS) $(CXXFLAGS)
+
+install: $(TARGET)
+	$(INSTALL) -d $(DESTDIR)${BINDIR}
+	$(INSTALL) -m 755 $(TARGET) $(DESTDIR)${BINDIR}
+	$(INSTALL) -d $(DESTDIR)${DOCDIR}
+	$(INSTALL) -m 644 $(DOCFILES) $(DESTDIR)${DOCDIR}
 
 # ------------------------------------
 # Include all dependency files
