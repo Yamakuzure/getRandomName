@@ -1,0 +1,52 @@
+getRandomName Revision History
+------------------------------
+
+0.8.6 - 2012-04-??
+Version bump to new pwxLib release version
+
+0.8.5.2 - 2012-03-23
+Fixed an Effective C++ issue
+
+0.8.5.1 - 2012-03-20
+Fixed a memory leak introduced with version 0.7.0.2
+
+0.8.5 - 2012-03-01
+Welcome to 2012. Version bump to new pwxLib release version
+
+0.8.3 - 2011-10-16
+Version bump to new pwxLib release version
+
+0.8.2 - 2011-10-07
+Version bump to new pwxLib release version
+
+0.8.1 - 2011-09-30
+Version bump to new pwxLib release version
+
+0.8.0 - 2011-07-14
+Version bump to new pwxLib release version
+
+0.7.2 - 2011-04-07
+Version bump to new pwxLib release version
+
+0.7.1 - 2011-03-26
+Version bump to new pwxLib release version
+
+0.7.0.2 - 2011-03-06
+Patches for compatibility with Visual C++ 2008
+
+0.7.0.1 - 2011-03-02
+changed from manual parsing to the usage of pwxArgs
+
+0.7.0 - 2010-11-09
+Version bump to new pwxLib release version
+
+set
+0.6.2 - 2010-07-09
+added norandom option and made random starting offsets used only when
+ no manual offsets are 
+0.6.1 - 2010-07-08
+added options to use own modifiers for the coordinates
+
+0.6.0 - 2010-05-19
+Initial public release
+
