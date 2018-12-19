@@ -44,6 +44,7 @@
   * 0.8.5.1   2012-03-20  sed, PrydeWorX  Fixed a memory leak introduced with version 0.7.0.2
   * 0.8.5.2   2012-03-23  sed, PrydeWorX  Fixed an Effective C++ issue
   * 0.8.6     2012-04-??  sed, PrydeWorX  Version bump to new pwxLib release version
+  * 0.9.0     2018-12-19  sed, PrydeWorX  Updated to support the latest pwxLib version
   @endverbatim
 **/
 
@@ -53,98 +54,85 @@ using pwx::RNG;
 
 #include "main.h"
 
-int main(int argc, char * argv[])
-{
-  int32_t result = EXIT_SUCCESS;
-  ENVIRONMENT * env = NULL;
+static int create_output(ENVIRONMENT* env, std::ostream &outStream, bool showProgress);
 
-  // Set a random seed first:
-  RNG.setSeed(RNG.random(10000, 25000));
+int main( int argc, char* argv[] ) {
+    int32_t result = EXIT_SUCCESS;
+    ENVIRONMENT* env = NULL;
 
-  try
-    {
-      env = new ENVIRONMENT(RNG.getSeed());
-      result = processArguments(env, argc, argv);
-    }
-  catch (std::bad_alloc &e)
-    {
-      cerr << "ERROR : Unable to create environment!" << endl;
-      cerr << "REASON: \"" << e.what() << "\"" << endl;
-      env = NULL;
-      result = EXIT_FAILURE;
+    // Set a random seed first:
+    RNG.setSeed( RNG.random( 10000, 25000 ) );
+
+    try {
+        env = new ENVIRONMENT( RNG.getSeed() );
+        result = processArguments( env, argc, argv );
+    } catch ( std::bad_alloc& e ) {
+        cerr << "ERROR : Unable to create environment!" << endl;
+        cerr << "REASON: \"" << e.what() << "\"" << endl;
+        env = NULL;
+        result = EXIT_FAILURE;
     }
 
-  if ((EXIT_SUCCESS == result) && env && env->doWork)
-    {
-      RNG.setSeed(env->seed);
-      if (env->useSeedOff)
-        {
-          double maxOffset = env->seed ? static_cast<double>(env->seed) : 1000.0;
-          double minOffset = env->seed ? static_cast<double>(env->seed) * -1.0 : -1000.0;
-          env->setOffsets(RNG.random(minOffset, maxOffset),
-                          RNG.random(minOffset, maxOffset),
-                          RNG.random(minOffset, maxOffset),
-                          RNG.random(minOffset, maxOffset), true);
+    if ( ( EXIT_SUCCESS == result ) && env && env->doWork ) {
+        RNG.setSeed( env->seed );
+        if ( env->useSeedOff ) {
+            double maxOffset = env->seed ? static_cast<double>( env->seed ) : 1000.0;
+            double minOffset = env->seed ? static_cast<double>( env->seed ) * -1.0 : -1000.0;
+            env->setOffsets( RNG.random( minOffset, maxOffset ),
+                             RNG.random( minOffset, maxOffset ),
+                             RNG.random( minOffset, maxOffset ),
+                             RNG.random( minOffset, maxOffset ), true );
         }
 
-      if (env->filename.size() > 0)
-        {
-          std::ofstream ofs(env->filename.c_str());
+        if ( env->filename.size() > 0 ) {
+            std::ofstream ofs( env->filename.c_str() );
 
-          if (ofs.is_open())
-            {
-              char disp[32];
-              memset(disp, 0, 32);
-              for (int32_t i = 0; i < env->count; ++i)
-                {
-                  ofs << RNG.rndName(env->offsetX, env->offsetY, env->offsetZ, env->offsetW,
-                                     env->maxChars, env->maxSyllables, env->maxParts) << endl;
+            if ( ofs.is_open() )
+                    result = create_output(env, ofs, true);
+            else
+                cerr << "ERROR: Can't write into " << env->filename << "!" << endl;
+        } else
+                result = create_output(env, cout, false);
+    }
 
-                  if (env->useRandom && !env->useModVals)
-                    env->setOffsets(RNG.random(-5.0L, 5.0L),
-                                    RNG.random(-5.0L, 5.0L),
-                                    RNG.random(-5.0L, 5.0L),
-                                    RNG.random(-5.0L, 5.0L), true);
-                  else
-                    env->setOffsets();
+    if ( env )
+        delete env;
 
-                  memset(disp, '\b', strlen(disp));
-                  cout << disp;
-                  snprintf(disp, 31, "%d", i + 1);
-                  cout << disp;
-                  cout.flush();
+    return ( result );
+}
+
+
+static int create_output(ENVIRONMENT* env, std::ostream &outStream, bool showProgress) {
+        char* xName = nullptr;
+        char disp[32];
+
+        for ( int32_t i = 0; i < env->count; ++i ) {
+                xName = RNG.rndName( env->offsetX, env->offsetY, env->offsetZ, env->offsetW,
+                                     env->maxChars, env->maxSyllables, env->maxParts );
+                if ( xName ) {
+                        outStream << xName << endl;
+                        free ( xName );
+                } else {
+                        outStream << "Error: No name generated..." << endl;
+                        return EXIT_FAILURE;
                 }
-              ofs.close();
-              cout << endl;
-            }
-          else
-            cerr << "ERROR: Can't write into " << env->filename << "!" << endl;
-        }
-      else
-        {
-          for (int32_t i = 0; i < env->count; ++i)
-            {
-              char* xName = RNG.rndName(env->offsetX, env->offsetY, env->offsetZ, env->offsetW,
-                                        env->maxChars, env->maxSyllables, env->maxParts);
-              if (xName)
-                {
-                  cout << xName << endl;
-                  free (xName);
+
+                if (showProgress && (&outStream != &cout) ) {
+                        memset( disp, '\b', strlen( disp ) );
+                        cout << disp;
+                        snprintf( disp, 31, "%d", i + 1 );
+                        cout << disp;
+                        cout.flush();
                 }
-              if (env->useRandom && !env->useModVals)
-                env->setOffsets(RNG.random(-5.0L, 5.0L),
-                                RNG.random(-5.0L, 5.0L),
-                                RNG.random(-5.0L, 5.0L),
-                                RNG.random(-5.0L, 5.0L), true);
-              else
-                env->setOffsets();
-            }
+
+                if ( env->useRandom && !env->useModVals )
+                        env->setOffsets( RNG.random( -5.0L, 5.0L ),
+                                         RNG.random( -5.0L, 5.0L ),
+                                         RNG.random( -5.0L, 5.0L ),
+                                         RNG.random( -5.0L, 5.0L ), true );
+                        else
+                                env->setOffsets();
         }
 
-    }
-
-  if (env)
-    delete env;
-
-  return (result);
+        return EXIT_SUCCESS;
 }
