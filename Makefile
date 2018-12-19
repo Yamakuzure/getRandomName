@@ -1,10 +1,21 @@
-.PHONY: all clean
+CXX       = $(shell which g++)
+CXXFLAGS += -std=c++17 -Wall -Wextra -Wpedantic -fexceptions -O2
+CXXFLAGS += $(shell pkg-config --cflags pwxlib)
+LDFLAGS  += $(shell pkg-config --libs pwxlib)
+TARGET    = getrn
+SOURCES = $(wildcard *.cpp)
+MODULES = $(SOURCES:.cpp=.o)
 
-CXX       = g++
-CXXFLAGS += -I../../..
-LDFLAGS  +=
-TARGET    = ../../getrn
-MODULES   = environment.o tools.o main.o
+# ------------------------------------
+# Rules
+# ------------------------------------
+.Phony: clean depend
+
+.SUFFIXES: .cpp
+
+%.o: %.cpp
+	@echo "Compiling $@"
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 all: $(TARGET)
 
@@ -13,15 +24,18 @@ clean:
 	@rm -rf $(TARGET) $(MODULES)
 
 
-$(TARGET): $(MODULES)
-	@echo "Linking $(TARGET) ..."
-	@$(CXX) -o $(TARGET) $(LDFLAGS) $(MODULES)
+$(TARGET): depend $(MODULES)
+	@echo "Linking $(TARGET)"
+	$(CXX) $(LDFLAGS) -o $(TARGET) $(MODULES)
 
-%.o: %.cpp
-	@echo "Generating $@ ..."
-	@$(CXX) -c $< -o $@ $(CXXFLAGS)
+# ------------------------------------
+# Create dependencies
+# ------------------------------------
+depend: Makefile
+	@echo "Checking dependencies"
+	@$(CXX) -MM $(CXXFLAGS) $(SOURCES) > Makefile.dep
 
-# --- Dependencies ---
-%.cpp: %.h
-main.h: environment.h tools.h
-tools.h: main.h Args.h
+# ------------------------------------
+# Include dependencies
+# ------------------------------------
+-include Makefile.dep
