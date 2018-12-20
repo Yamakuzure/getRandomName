@@ -3,7 +3,7 @@
 # ------------------------------------
 # Version
 # ------------------------------------
-VERSION := 0.9.0
+VERSION := 0.9.1
 
 
 DEBUG   ?= NO
@@ -20,20 +20,27 @@ SANITIZE_THREAD  ?= NO
 
 
 # ------------------------------------
+# Save environment values 
+# ------------------------------------
+ENV_CPPFLAGS := ${CPPFLAGS}
+ENV_CXXFLAGS := ${CXXFLAGS}
+ENV_LDFLAGS  := ${LDFLAGS}
+
+
+# ------------------------------------
 # Tools and Flags
 # ------------------------------------
 CXX      ?= $(shell which g++)
-CXXFLAGS += -std=c++17 -Wall -Wextra -Wpedantic -fexceptions
-CPPFLAGS += $(shell pkg-config --cflags pwxlib)
-CPPFLAGS += -DVERSION=\"${VERSION}\"
+CXXFLAGS := -std=c++17 -Wall -Wextra -Wpedantic -fexceptions $(ENV_CXXFLAGS)
+CPPFLAGS := $(ENV_CPPFLAGS) $(shell pkg-config --cflags pwxlib) -DVERSION=\"$(VERSION)\"
 INSTALL  := $(shell which install)
-LDFLAGS  += $(shell pkg-config --libs pwxlib)
+LDFLAGS  := $(ENV_LDFLAGS) $(shell pkg-config --libs pwxlib)
 RM       := $(shell which rm) -f
 SED      := $(shell which sed)
 TARGET   := getrn
 
 # Use the compiler as the linker.
-LD := $(CXX)
+LD       ?= $(CXX)
 
 
 # ------------------------------------
