@@ -65,6 +65,9 @@ make
 make install
 ```
 
+See the `Makefile` for the options you have.
+
+
 Prerequisites
 ---------------------------------------
  * `getRandomNames` depends on the latest PrydeWorX Library (pwxLib).  
