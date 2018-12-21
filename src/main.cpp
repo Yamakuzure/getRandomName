@@ -53,6 +53,7 @@
   * 0.8.6     2012-04-??  sed, PrydeWorX  Version bump to new pwxLib release version
   * 0.9.0     2018-12-19  sed, PrydeWorX  Updated to support the latest pwxLib version and fixed
   *                                       a possible memory leak when writing into an output file.
+  * 0.9.1     2018-12-21  sed, PrydeWorX  Enhanced Makefile for package manager support and debugging.
   @endverbatim
 **/
 
