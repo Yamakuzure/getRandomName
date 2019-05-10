@@ -4,7 +4,7 @@ NEWS
 2018-12-21
 ---------------------------------------
 * getRandomName-0.9.1 released
-  Now with a better, developer-firendly Makefile
+  Now with a better, developer-friendly Makefile
 
 2018-12-19
 ---------------------------------------

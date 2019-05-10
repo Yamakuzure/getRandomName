@@ -7,9 +7,9 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="..\..\getrn" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="..\..\" />
-				<Option object_output=".\.objdbg\" />
+				<Option output="../../getrn" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../" />
+				<Option object_output="./.objdbg/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option parameters="count 10" />
@@ -24,9 +24,9 @@
 				</Linker>
 			</Target>
 			<Target title="Effective C++">
-				<Option output="..\..\getrn" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="..\..\" />
-				<Option object_output=".\.objdbg\" />
+				<Option output="../../getrn" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../" />
+				<Option object_output="./.objdbg/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option parameters="count 10" />
@@ -45,9 +45,9 @@
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="..\..\getrn" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="..\..\" />
-				<Option object_output=".\.objrls\" />
+				<Option output="../../getrn" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../" />
+				<Option object_output="./.objrls/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -59,9 +59,9 @@
 				</Linker>
 			</Target>
 			<Target title="Debug32">
-				<Option output="..\..\getrn" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="..\..\" />
-				<Option object_output=".\.objdbg\" />
+				<Option output="../../getrn" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../" />
+				<Option object_output="./.objdbg/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -76,9 +76,9 @@
 				</Linker>
 			</Target>
 			<Target title="Graphite">
-				<Option output="..\..\getrn" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="..\..\" />
-				<Option object_output=".\.objrls\" />
+				<Option output="../../getrn" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../" />
+				<Option object_output="./.objrls/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -96,9 +96,9 @@
 				</Linker>
 			</Target>
 			<Target title="WinDebug">
-				<Option output="..\..\getrn" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="..\..\" />
-				<Option object_output=".\.objdbg\" />
+				<Option output="../../getrn" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../" />
+				<Option object_output="./.objdbg/" />
 				<Option type="1" />
 				<Option compiler="msvc10" />
 				<Option projectCompilerOptionsRelation="1" />
@@ -113,16 +113,16 @@
 					<Add option="/W3" />
 					<Add option="/Za" />
 					<Add option="/Zi" />
-					<Add directory="D:\PrydeWorX\pwxLib\" />
+					<Add directory="D:/PrydeWorX/pwxLib/" />
 				</Compiler>
 				<Linker>
 					<Add option="/DEBUG" />
 				</Linker>
 			</Target>
 			<Target title="WinRelease">
-				<Option output="..\..\getrn" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="..\..\" />
-				<Option object_output=".\.objrls\" />
+				<Option output="../../getrn" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../" />
+				<Option object_output="./.objrls/" />
 				<Option type="1" />
 				<Option compiler="msvc10" />
 				<Option projectCompilerOptionsRelation="1" />
@@ -131,7 +131,7 @@
 					<Add option="/MT" />
 					<Add option="/GA" />
 					<Add option="/Ox" />
-					<Add directory="D:\PrydeWorX\pwxLib\" />
+					<Add directory="D:/PrydeWorX/pwxLib/" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -141,7 +141,16 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="AUTHORS" />
+		<Unit filename="CONTRIBUTING.md" />
+		<Unit filename="ChangeLog" />
+		<Unit filename="INSTALL.md" />
+		<Unit filename="LICENSE" />
 		<Unit filename="Makefile" />
+		<Unit filename="NEWS.md" />
+		<Unit filename="README.md" />
+		<Unit filename="TODO.md" />
+		<Unit filename="code_of_conduct.md" />
 		<Unit filename="environment.cpp" />
 		<Unit filename="environment.h" />
 		<Unit filename="main.cpp" />
