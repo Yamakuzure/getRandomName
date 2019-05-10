@@ -151,12 +151,12 @@
 		<Unit filename="README.md" />
 		<Unit filename="TODO.md" />
 		<Unit filename="code_of_conduct.md" />
-		<Unit filename="src/environment.cpp" />
-		<Unit filename="src/environment.h" />
-		<Unit filename="src/main.cpp" />
-		<Unit filename="src/main.h" />
-		<Unit filename="src/tools.cpp" />
-		<Unit filename="src/tools.h" />
+		<Unit filename="environment.cpp" />
+		<Unit filename="environment.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="main.h" />
+		<Unit filename="tools.cpp" />
+		<Unit filename="tools.h" />
 		<Extensions>
 			<envvars />
 			<code_completion />

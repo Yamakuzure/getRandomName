@@ -1,11 +1,11 @@
-#ifndef _PWX_GETRANDOMNAME_TOOLS_H
-#define _PWX_GETRANDOMNAME_TOOLS_H 1
+#ifndef PWX_GETRANDOMNAME_MAIN_H
+#define PWX_GETRANDOMNAME_MAIN_H 1
 
-/** @file tools.h
+/** @file main.h
  * 
  * This file is part of getRandomName
  *
- * (c) 2007 - 2019 PrydeWorX
+ * (c) 2007 - 2018 PrydeWorX
  * @author Sven Eden, PrydeWorX - Bardowick, Germany
  *         sven.eden@prydeworx.com
  *         https://github.com/Yamakuzure/getRandomName ; https://prydeworx.com/getRandomName
@@ -34,11 +34,15 @@
  **/
 
 
-#include "main.h"
+#include <cstdlib>
+#include <climits>
+#include <cstring>
+#include <iostream>
+using std::cout;
+using std::cerr;
+using std::endl;
 
-int32_t  processArguments( ENVIRONMENT* env, int argc, char* argv[] );
-void     showHelp        ( ENVIRONMENT* env );
-void     showVersion     ( ENVIRONMENT* env );
-void     showVerDash     ( ENVIRONMENT* env );
+#include "environment.h"
+#include "tools.h"
 
-#endif // _PWX_GETRANDOMNAME_TOOLS_H
+#endif // PWX_GETRANDOMNAME_MAIN_H
