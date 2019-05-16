@@ -54,11 +54,12 @@
   * 0.9.0     2018-12-19  sed, PrydeWorX  Updated to support the latest pwxLib version and fixed
   *                                       a possible memory leak when writing into an output file.
   * 0.9.1     2018-12-21  sed, PrydeWorX  Enhanced Makefile for package manager support and debugging.
+  * 0.9.2     2019-05-10  sed, PrydeWorX  Update to new pwxLib API and include layout
   @endverbatim
 **/
 
 #include <fstream>
-#include <pwx_worker_RNG.h>
+#include <RNG>
 using pwx::RNG;
 
 #include "main.h"

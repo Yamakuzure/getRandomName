@@ -33,8 +33,8 @@
 
 #include "tools.h"
 
-#include <pwx_worker_PAH.h>
-#include <pwxStreamHelpers.h>
+#include <PAH>
+#include <PStreamHelpers>
 
 using pwx::CAdjRight;
 using pwx::PAH;

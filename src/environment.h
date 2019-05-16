@@ -46,7 +46,6 @@ using std::string;
   * It is used to circumvent the necessity to add too many arguments to
   * global functions.
   **/
-
 struct ENVIRONMENT {
     /** Default constructor */
     explicit ENVIRONMENT( int32_t aSeed = 0 );
