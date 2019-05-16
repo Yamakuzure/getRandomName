@@ -133,7 +133,7 @@ all: $(TARGET)
 # Regular targets
 # ------------------------------------
 clean:
-	@echo "Cleaning makeSimplexTexture"
+	@echo "Cleaning $(TARGET)"
 	@rm -rf $(TARGET) $(MODULES)
 
 

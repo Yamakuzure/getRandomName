@@ -1,5 +1,6 @@
 # Prerequisites
 *.d
+*.d.*
 
 # Compiled Object files
 *.slo
@@ -32,3 +33,10 @@
 *.app
 Makefile.dep
 getrn
+
+# Backup and temporaries
+*~
+*.bak
+*.old
+*.orig
+*.rej
