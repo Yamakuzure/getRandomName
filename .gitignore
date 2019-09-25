@@ -40,3 +40,4 @@ getrn
 *.old
 *.orig
 *.rej
+*.layout

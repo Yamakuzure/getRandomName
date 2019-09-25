@@ -1,6 +1,11 @@
 getRandomName Revision History
 ------------------------------
 
+1.0.0 - 2019-09-25
+ * Fixed root level text files
+ * Set up proper Code::Blocks build environment
+ * Update to new pwxLib API
+
 0.9.1 - 2018-12-21
  * Update Makefile to make debugging easier and to be more friendly to package
    managers building from source like Gentoo portage.
